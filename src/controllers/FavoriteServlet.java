@@ -32,37 +32,54 @@ public class FavoriteServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action.equals("add_favorite")) {
+            addFavorite(request, response);
+        } else if (action.equals("remove_favorite")) {
+            removeFavorite(request, response);
+        }
+    }
+
+    private void addFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
         em.getTransaction().begin();
 
         Favorite f = new Favorite();
+        Integer recipeId = Integer.parseInt(request.getParameter("id"));
+        f.setRecipe_id(recipeId);
 
-        Integer id = Integer.parseInt(request.getParameter("id"));
-        f.setRecipe_id(id);
-
-        String action = request.getParameter("action");
-
-        //すでにデータベースに登録されているIDを取得
+        // 重複したレシピをお気に入りしないようにする
         TypedQuery<Integer> query = em.createQuery("SELECT f.recipe_id FROM Favorite f", Integer.class);
         List<Integer> existingIds = query.getResultList();
-
-
-        if (action.equals("add_favorite")) {
-            if (existingIds.contains(id)) {
-                //エラーメッセージ
-
-            } else {
-                em.persist(f);
-            }
-        } else if (action.equals("remove_favorite")) {
-            em.remove(f);
+        if (existingIds.contains(recipeId)) {
+            // エラーを返却する
+            response.sendRedirect(request.getContextPath() + "/error");
         }
 
+        em.persist(f);
         em.getTransaction().commit();
         em.close();
 
         response.sendRedirect(request.getContextPath() + "/index");
+    }
 
+    private void removeFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        EntityManager em = DBUtil.createEntityManager();
+        em.getTransaction().begin();
+
+        // recipe_idからfavoriteを取得する
+        Integer recipeId = Integer.parseInt(request.getParameter("id"));
+        TypedQuery<Favorite> query = em.createQuery(
+                "SELECT * FROM Favorite WHERE recipe_id = :recipeId",
+                Favorite.class)
+                .setParameter("recipeId", recipeId);
+        Favorite f = query.getSingleResult();
+
+        em.remove(f);
+        em.getTransaction().commit();
+        em.close();
+
+        response.sendRedirect(request.getContextPath() + "/index");
     }
 
 }

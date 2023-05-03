@@ -17,7 +17,7 @@
 
         <p><a href="${pageContext.request.contextPath}/new">投稿する</a></p>
 
-        <p><a href="${pageContext.request.contextPath}/favoriteList">お気に入りレシピ</a></p>
+        <p><a href="${pageContext.request.contextPath}/favorite_list">お気に入りレシピ</a></p>
 
      </c:param>
 </c:import>
