@@ -5,12 +5,12 @@
     <c:param name="content">
         <h2>お気に入りレシピ</h2>
         <ul>
-            <c:forEach var="favorites" items="{favorites}">
+            <c:forEach var="favorite_recipe" items="${favorite_recipes}">
                 <li>
-                    <a href="${pageContext.request.contextPath}/show?id=${recipe.id}">
-                        <c:out value="${recipe.id}" />
+                    <a href="${pageContext.request.contextPath}/show?id=${favorite_recipe.id}">
+                        <c:out value="${favorite_recipe.id}" />
                     </a>
-                    ：<c:out value="${recipe.title}"></c:out>
+                    ：<c:out value="${favorite_recipe.title}"></c:out>
                 </li>
             </c:forEach>
         </ul>
