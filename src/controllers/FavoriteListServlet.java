@@ -31,38 +31,23 @@ public class FavoriteListServlet extends HttpServlet {
     }
 
     /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        //データベースから全てのレシピ情報を取得
-        List<Recipe> recipes = em.createNamedQuery("getAllRecipes", Recipe.class).getResultList();
-
-        //recipesテーブルのidをListに格納
-        List<Integer> recipeId = new ArrayList<Integer>();
-        for (Recipe recipe : recipes) {
-            recipeId.add(recipe.getId());
-        }
-
-        //データベースからfavoritesテーブルのrecipe_idを取得してListに格納
+        // データベースからfavoritesテーブルのrecipe_idを取得してListに格納
         TypedQuery<Integer> query = em.createQuery("SELECT f.recipe_id FROM Favorite f", Integer.class);
-        List<Integer> favoriteId = query.getResultList();
+        List<Integer> recipeIds = query.getResultList();
 
-        //recipesテーブルのidとfavoritesテーブルのrecipe_idが一致した場合にお気に入りListに追加
-        List<Recipe> favorites = new ArrayList<Recipe>();
-        for(int i = 0; i < recipeId.size(); i++) {
-            for(int j = 0; j < favoriteId.size(); j++) {
-                if(recipeId.get(i) == favoriteId.get(j)) {
-                    favorites.add(recipes.get(i));
-                }
-            }
-        }
-
+        // RecipeデータベースからrecipeIdsに一致するRecipeを取得する(IN句を使う)
+        List<Recipe> recipes = new ArrayList<Recipe>() {}; // 実際はDBにアクセス
         em.close();
 
-        //お気に入りListをリクエストスコープに保存
-        request.setAttribute("favorites", favorites);
+        // お気に入りListをリクエストスコープに保存
+        request.setAttribute("favorite", recipes); // favorite_recipesとかの方がわかりやすい
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/recipes/favoriteList.jsp");
         rd.forward(request, response);
