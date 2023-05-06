@@ -53,7 +53,9 @@ public class FavoriteServlet extends HttpServlet {
         List<Integer> existingIds = query.getResultList();
         if (existingIds.contains(recipeId)) {
             // エラーを返却する
+            request.getSession().setAttribute("errorMessage", "このレシピは既にお気に入り登録されています。");
             response.sendRedirect(request.getContextPath() + "/error");
+            return;
         }
 
         em.persist(f);
