@@ -16,11 +16,24 @@
         <p><a href="${pageContext.request.contextPath}/index">戻る</a></p>
         <p><a href="${pageContext.request.contextPath}/edit?id=${recipe.id}">編集</a></p>
 
-        <form action="favorite" method="post">
-            <input type="hidden" name="id" id="id_recipe" value="${recipe.id}" />
-            <button type="submit" name="action" value="add_favorite">お気に入り登録</button>
-            <button type="submit" name="action" value="remove_favorite">お気に入り解除</button>
-        </form>
+        <%
+            //お気に入り状態をリクエスト属性から取得
+            boolean isFavorited = (Boolean) request.getAttribute("isFavorited");
+        %>
+
+        <% if (isFavorited) { %>
+            <!-- お気に入り解除ボタン -->
+            <form action="favorite" method="post">
+                <input type="hidden" name="id" id="id_recipe" value="${recipe.id}" />
+                <button type="submit" name="action" value="remove_favorite">お気に入り解除</button>
+            </form>
+        <% } else { %>
+            <!-- お気に入り登録ボタン -->
+            <form action="favorite" method="post">
+                <input type="hidden" name="id" id="id_recipe" value="${recipe.id}" />
+                <button type="submit" name="action" value="add_favorite">お気に入り登録</button>
+            </form>
+        <% } %>
 
     </c:param>
 </c:import>
