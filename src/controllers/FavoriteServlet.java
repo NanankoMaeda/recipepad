@@ -70,7 +70,7 @@ public class FavoriteServlet extends HttpServlet {
         // recipe_idからfavoriteを取得する
         Integer recipeId = Integer.parseInt(request.getParameter("id"));
         TypedQuery<Favorite> query = em.createQuery(
-                "SELECT * FROM Favorite WHERE recipe_id = :recipeId",
+                "SELECT f FROM Favorite f WHERE recipe_id = :recipeId",
                 Favorite.class)
                 .setParameter("recipeId", recipeId);
         Favorite f = query.getSingleResult();
