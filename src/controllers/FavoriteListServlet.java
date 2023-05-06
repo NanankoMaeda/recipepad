@@ -46,11 +46,6 @@ public class FavoriteListServlet extends HttpServlet {
                 .setParameter("recipeIds", recipeIds);
         List<Recipe> favoriteRecipes = recipesQuery.getResultList();
 
-        System.out.println("---------------------------------");
-        System.out.println(favoriteRecipes);
-        System.out.println("---------------------------------");
-
-
         em.close();
 
         // お気に入りListをリクエストスコープに保存
