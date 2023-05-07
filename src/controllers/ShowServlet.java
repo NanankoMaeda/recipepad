@@ -39,6 +39,12 @@ public class ShowServlet extends HttpServlet {
         //該当のIDレシピ1件のみをデータベースから取得
         Recipe r = em.find(Recipe.class, Integer.parseInt(request.getParameter("id")));
 
+        //改行コードをHTMLの<br>タグに置換して、リクエストスコープにセット
+        String ingredients = r.getIngredient().replace("\r\n", ",").replace("\n", ",");
+        String contents = r.getContent().replace("\r\n", ",").replace("\n", ",");
+        r.setIngredient(ingredients);
+        r.setContent(contents);
+
         em.close();
 
         //お気に入り状態をチェック
@@ -48,6 +54,8 @@ public class ShowServlet extends HttpServlet {
         //データをリクエストスコープにセットしてshow.jspを呼び出す
         request.setAttribute("recipe", r);
         request.setAttribute("isFavorited", isFavorited);
+        request.setAttribute("ingredients", ingredients);
+        request.setAttribute("contents", contents);
 
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/recipes/show.jsp");
