@@ -4,7 +4,7 @@
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <h2>レシピ一覧</h2>
-        <ul>
+        <ul class="index">
             <c:forEach var="recipe" items="${recipes}">
                 <li>
                     <a href="${pageContext.request.contextPath}/show?id=${recipe.id}">
