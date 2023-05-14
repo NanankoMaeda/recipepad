@@ -14,20 +14,22 @@
         <%
         String ingredients = (String) request.getAttribute("ingredients");
         %>
-        <pre>
+        <ul class="ingredient">
             <c:forEach var="ingredient" items="${fn:split(ingredients,',')}">
                 <li><c:out value="${ingredient}" /></li>
             </c:forEach>
-        </pre>
+        </ul>
         <p>作り方</p>
         <%
         String contents = (String) request.getAttribute("contents");
         %>
-        <pre>
+        <div class="content">
+            <ol>
             <c:forEach var="content" items="${fn:split(contents,',')}">
                 <li><c:out value="${content}" /></li>
             </c:forEach>
-        </pre>
+            </ol>
+        </div>
         <br />
         <p>作成日時：<fmt:formatDate value="${recipe.created_at}" pattern="yyyy/MM/dd HH:mm" /></p>
         <p>更新日時：<fmt:formatDate value="${recipe.updated_at}" pattern="yyyy/MM/dd HH:mm" /></p>
