@@ -122,3 +122,13 @@ button {
 .ingredient li {
   font-size: 1rem;
 }
+
+#flush_success {
+    width: 100%;
+    padding-top: 28px;
+    padding-left: 2%;
+    padding-bottom: 28px;
+    margin-bottom: 15px;
+    color: #777777;
+    background-color: #FFFFDD;
+}

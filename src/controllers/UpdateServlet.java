@@ -52,9 +52,18 @@ public class UpdateServlet extends HttpServlet {
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             r.setUpdated_at(currentTime);       // 更新日時のみ上書き
 
+          //","を入力できないようにする
+            if (ingredient.contains(",") || content.contains(",")) {
+                // エラーを返却する
+                request.getSession().setAttribute("errorMessage", "材料や作り方に「,(カンマ)」は入力できません。");
+                response.sendRedirect(request.getContextPath() + "/error");
+                return;
+            }
+
             // データベースを更新
             em.getTransaction().begin();
             em.getTransaction().commit();
+            request.getSession().setAttribute("flush", "更新が完了しました。");
             em.close();
 
             // セッションスコープ上の不要になったデータを削除

@@ -51,8 +51,17 @@ public class CreateServlet extends HttpServlet {
             r.setCreated_at(currentTime);
             r.setUpdated_at(currentTime);
 
+            //","を入力できないようにする
+            if (ingredient.contains(",") || content.contains(",")) {
+                // エラーを返却する
+                request.getSession().setAttribute("errorMessage", "材料や作り方に「,(カンマ)」は入力できません。");
+                response.sendRedirect(request.getContextPath() + "/error");
+                return;
+            }
+
             em.persist(r);
             em.getTransaction().commit();
+            request.getSession().setAttribute("flush", "登録が完了しました。");
             em.close();
 
             response.sendRedirect(request.getContextPath() + "/index");
