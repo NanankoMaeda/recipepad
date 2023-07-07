@@ -52,6 +52,19 @@ a:hover {
     background-color: #40B0FF;
 }
 
+.pagination-item {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 30px;
+    background-color: #f0f0f0;
+    text-decoration: none;
+    color: black;
+}
+
+.pagination-item:hover {
+    background-color: #ddd;
+}
+
 input.title {
     width: 200px;
     height: 20px;

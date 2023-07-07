@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +20,8 @@ import utils.DBUtil;
  */
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
-        private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    private static final int MAX_RESULTS = 10; // max number of recipes per page
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -28,20 +30,32 @@ public class IndexServlet extends HttpServlet {
         super();
     }
 
-        /**
-         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-         */
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        List<Recipe> recipes = em.createNamedQuery("getAllRecipes", Recipe.class).getResultList();
+        int page = 1; // default to page 1
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+
+        TypedQuery<Recipe> query = em.createNamedQuery("getAllRecipes", Recipe.class);
+        query.setFirstResult((page - 1) * MAX_RESULTS);
+        query.setMaxResults(MAX_RESULTS);
+        List<Recipe> recipes = query.getResultList();
+
+        long totalRecipes = em.createNamedQuery("countAllRecipes", Long.class).getSingleResult();
+        long totalPages = (totalRecipes + MAX_RESULTS - 1) / MAX_RESULTS; // round up
 
         em.close();
 
         request.setAttribute("recipes", recipes);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("currentPage", page);
 
-        // フラッシュメッセージがセッションスコープにセットされていたら
-        // リクエストスコープに保存する（セッションスコープからは削除）
+        // Handle flash message if present
         if(request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
@@ -50,5 +64,4 @@ public class IndexServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/recipes/index.jsp");
         rd.forward(request, response);
     }
-
 }
