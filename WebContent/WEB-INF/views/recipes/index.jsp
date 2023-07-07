@@ -17,8 +17,20 @@
                     </a>
                     <c:out value="${recipe.title}"></c:out>
                 </li>
-             </c:forEach>
+            </c:forEach>
         </ul>
+
+
+        <c:forEach var="i" begin="1" end="${totalPages}">
+            <c:choose>
+                <c:when test="${i == currentPage}">
+                    <c:out value="${i}" />
+                </c:when>
+                <c:otherwise>
+                    <a href="${pageContext.request.contextPath}/index?page=${i}" class="pagination-item"><c:out value="${i}" /></a>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
 
         <p><a href="${pageContext.request.contextPath}/new">投稿する</a></p>
 
