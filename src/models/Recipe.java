@@ -29,13 +29,13 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "title", length = 255, nullable = false)
+    @Column(name = "title", length = 50, nullable = false)
     private String title;
 
-    @Column(name = "ingredient", length = 255, nullable = false)
+    @Column(name = "ingredient", length = 1000, nullable = false)
     private String ingredient;
 
-    @Column(name = "content", length = 255, nullable = false)
+    @Column(name = "content", length = 1000, nullable = false)
     private String content;
 
     @Column(name = "created_at", nullable = false)
