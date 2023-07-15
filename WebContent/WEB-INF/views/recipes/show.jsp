@@ -10,6 +10,11 @@
             のレシピ詳細
         </h2>
 
+        <%
+        String file = (String) request.getAttribute("file");
+        %>
+        <p>画像:<br><img src="upload/<%=file %>" width="400"></p>
+
         <p>材料</p>
         <%
         String ingredients = (String) request.getAttribute("ingredients");
