@@ -60,8 +60,6 @@ public class ShowServlet extends HttpServlet {
         request.setAttribute("contents", contents);
         request.setAttribute("file", file); // Use your method to get the filename of the recipe
 
-
-
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/recipes/show.jsp");
         rd.forward(request, response);
     }

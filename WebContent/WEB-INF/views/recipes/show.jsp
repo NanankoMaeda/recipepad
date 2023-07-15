@@ -13,7 +13,7 @@
         <%
         String file = (String) request.getAttribute("file");
         %>
-        <p>画像:<br><img src="upload/<%=file %>" width="400"></p>
+        <p><img src="upload/<%=file %>" width="400"></p>
 
         <p>材料</p>
         <%
@@ -48,13 +48,13 @@
             <!-- お気に入り解除ボタン -->
             <form class="button-container" action="favorite" method="post">
                 <input type="hidden" name="id" id="id_recipe" value="${recipe.id}" />
-                <button type="submit" name="action" value="remove_favorite" style="width:150px;height:40px">お気に入り解除</button>
+                <button type="submit" name="action" value="remove_favorite" style="width:150px;height:50px">お気に入り解除</button>
             </form>
         <% } else { %>
             <!-- お気に入り登録ボタン -->
             <form class="button-container" action="favorite" method="post">
                 <input type="hidden" name="id" id="id_recipe" value="${recipe.id}" />
-                <button type="submit" name="action" value="add_favorite" style="width:150px;height:40px">お気に入り登録</button>
+                <button type="submit" name="action" value="add_favorite" style="width:150px;height:50px">お気に入り登録</button>
             </form>
         <% } %>
 
