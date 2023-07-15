@@ -45,6 +45,8 @@ public class ShowServlet extends HttpServlet {
         r.setIngredient(ingredients);
         r.setContent(contents);
 
+        String file = r.getFile();
+
         em.close();
 
         //お気に入り状態をチェック
@@ -56,6 +58,8 @@ public class ShowServlet extends HttpServlet {
         request.setAttribute("isFavorited", isFavorited);
         request.setAttribute("ingredients", ingredients);
         request.setAttribute("contents", contents);
+        request.setAttribute("file", file); // Use your method to get the filename of the recipe
+
 
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/recipes/show.jsp");
