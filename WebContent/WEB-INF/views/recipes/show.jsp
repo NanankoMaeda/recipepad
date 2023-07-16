@@ -15,7 +15,7 @@
         %>
         <p><img src="upload/<%=file %>" width="400"></p>
 
-        <p>材料</p>
+        <strong><p>材料</p></strong>
         <%
         String ingredients = (String) request.getAttribute("ingredients");
         %>
@@ -24,7 +24,7 @@
                 <li><c:out value="${ingredient}" /></li>
             </c:forEach>
         </ul>
-        <p>作り方</p>
+        <strong><p>作り方</p></strong>
         <%
         String contents = (String) request.getAttribute("contents");
         %>

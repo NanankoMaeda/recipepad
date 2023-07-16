@@ -14,12 +14,12 @@
             <input type="file" name="file" id="file_recipe" /><br />
             <input type="hidden" name="_token" value="${_token}" />
             <br />
-            <br /> <label for="ingredient_recipe">材料</label><br />
-            <textarea name="ingredient" class="ingredient" id="ingredient_recipe"
+            <label for="ingredient_recipe">材料</label><br />
+            <textarea name="ingredient" class="ingredient_textbox" id="ingredient_recipe"
                 rows="6" wrap="hard">${recipe.ingredient}</textarea>
             <br />
             <br /> <label for="content_recipe">作り方</label><br />
-            <textarea name="content" class="content" id="content_recipe"
+            <textarea name="content" class="content_textbox" id="content_recipe"
                 rows="10" wrap="hard">${recipe.content}</textarea>
             <br />
 
