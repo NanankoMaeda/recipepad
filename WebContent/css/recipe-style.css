@@ -68,18 +68,18 @@ a:hover {
 }
 
 input.title {
-    width: 300px;
-    height: 20px;
+    width: 400px;
+    height: 25px;
 }
 
 input.ingredient {
-    width: 300px;
+    width: 400px;
     height: calc(1.25em * 6);
     line-height: 1.25;
 }
 
 input.content {
-    width: 300px;
+    width: 400px;
     height: calc(1.25em * 10);
     line-height: 1.25;
 }
@@ -115,7 +115,12 @@ button:hover {
 }
 
 .content {
-  width: 300px;
+  width: 600px;
+  list-style: none;
+}
+
+.content_textbox {
+  width: 400px;
   list-style: none;
 }
 
@@ -133,7 +138,12 @@ button:hover {
 }
 
 .ingredient {
-  width: 300px;
+  width: 600px;
+  list-style: none;
+}
+
+.ingredient_textbox {
+  width: 400px;
   list-style: none;
 }
 

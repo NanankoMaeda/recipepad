@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
-        <h2>id : ${recipe.id}の編集ページ</h2>
+        <h2>${recipe.title}の編集ページ</h2>
 
         <form method="POST" class="form-button-container" enctype="multipart/form-data"
             action="${pageContext.request.contextPath}/update">
@@ -11,16 +11,16 @@
                 class="title" id="title" value="${recipe.title }" /> <br />
             <br />
             <label for="file_recipe">画像</label><br />
-            <img id="uploaded_image" src="${pageContext.request.contextPath}/upload/${recipe.file}" width="300"><br />
+            <img id="uploaded_image" src="${pageContext.request.contextPath}/upload/${recipe.file}" width="400"><br />
             <input type="file" name="file" id="file_recipe" onchange="loadImage(event)"><br />
             <br /> <input type="hidden" name="_token" value="${_token}" />
             <br />
-            <br /> <label for="ingredient_recipe">材料</label><br />
-            <textarea name="ingredient" class="ingredient" id="ingredient_recipe"
+            <label for="ingredient_recipe">材料</label><br />
+            <textarea name="ingredient" class="ingredient_textbox" id="ingredient_recipe"
                 rows="6" wrap="hard">${recipe.ingredient}</textarea>
             <br />
             <br /> <label for="content_recipe">作り方</label><br />
-            <textarea name="content" class="content" id="content_recipe"
+            <textarea name="content" class="content_textbox" id="content_recipe"
                 rows="10" wrap="hard">${recipe.content}</textarea>
             <br />
 
