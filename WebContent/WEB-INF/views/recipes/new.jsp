@@ -6,7 +6,7 @@
         <h2>レシピ新規作成</h2>
 
         <form method="POST" class="form-button-container" enctype="multipart/form-data"
-            action="${pageContext.request.contextPath}/create">
+            action="${pageContext.request.contextPath}/create" onsubmit="return confirmUpdate();">
             <label for="title">タイトル</label><br /> <input type="text" name="title"
                 class="title" id="title" value="${recipe.title }" /> <br />
             <br />
@@ -25,6 +25,22 @@
 
             <button type="submit">投稿</button>
         </form>
+        <script>
+        function confirmUpdate() {
+            var titleInput = document.getElementById('title');
+            var fileInput = document.getElementById('file_recipe');
+
+            if (titleInput.value === "") {
+                alert("タイトルを入力してください");
+                return false;
+            }
+            if (fileInput.value === "") {
+                alert("画像を選択してください");
+                return false;
+            }
+            return confirm("更新してもよろしいですか？");
+        }
+        </script>
 
         <p><a href="${pageContext.request.contextPath}/index">戻る</a></p>
 

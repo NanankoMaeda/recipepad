@@ -6,7 +6,7 @@
         <h2>${recipe.title}の編集ページ</h2>
 
         <form method="POST" class="form-button-container" enctype="multipart/form-data"
-            action="${pageContext.request.contextPath}/update">
+            action="${pageContext.request.contextPath}/update" onsubmit="return confirmUpdate();">
             <label for="title">タイトル</label><br /> <input type="text" name="title"
                 class="title" id="title" value="${recipe.title }" /> <br />
             <br />
@@ -44,6 +44,16 @@
             if(confirm("本当に削除してよろしいですか？")){
                 document.forms[1].submit();
             }
+        }
+
+        function confirmUpdate() {
+            var titleInput = document.getElementById('title');
+
+            if (titleInput.value === "") {
+                alert("タイトルを入力してください");
+                return false;
+            }
+            return confirm("更新してもよろしいですか？");
         }
 
         </script>
