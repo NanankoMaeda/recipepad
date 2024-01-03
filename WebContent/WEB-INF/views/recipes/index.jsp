@@ -36,5 +36,26 @@
 
         <p><a href="${pageContext.request.contextPath}/favorite_list">お気に入りレシピ</a></p>
 
-     </c:param>
+        <button class="darkmode-button" onclick="toggleDarkMode()">ダークモード切り替え</button>
+        <script>
+            // ダークモード切り替え関数
+            function toggleDarkMode() {
+                var body = document.body;
+                body.classList.toggle("dark-mode");
+
+                // ダークモードの状態をローカルストレージに保存
+                var isDarkMode = body.classList.contains("dark-mode");
+                localStorage.setItem("darkMode", isDarkMode);
+            }
+
+            // ローカルストレージからダークモードの状態を読み込む
+            window.onload = function() {
+                var isDarkMode = localStorage.getItem("darkMode") === "true";
+                if (isDarkMode) {
+                    document.body.classList.add("dark-mode");
+                }
+            };
+        </script>
+
+    </c:param>
 </c:import>

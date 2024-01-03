@@ -58,6 +58,16 @@
             </form>
         <% } %>
 
+        <script>
+            // ローカルストレージからダークモードの状態を読み込む
+            window.onload = function() {
+                var isDarkMode = localStorage.getItem("darkMode") === "true";
+                if (isDarkMode) {
+                    document.body.classList.add("dark-mode");
+                }
+            };
+        </script>
+
         <p><a href="${pageContext.request.contextPath}/edit?id=${recipe.id}">編集</a></p>
         <p><a href="${pageContext.request.contextPath}/index">戻る</a></p>
 
