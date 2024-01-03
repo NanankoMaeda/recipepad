@@ -33,7 +33,7 @@ li {
     text-align: left;
     margin-top: 0;
     margin-bottom: 0;
-    padding-left: 150px;
+    padding-left: 90px;
     padding-top:3px;
     padding-bottom:3px;
 }
@@ -46,6 +46,8 @@ a {
     background-color: #80D0FF;
     border-radius: 30px;
     transition: background-color 0.2s;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 a:hover {
@@ -66,33 +68,39 @@ a:hover {
 }
 
 input.title {
-    width: 200px;
-    height: 20px;
+    width: 400px;
+    height: 25px;
 }
 
 input.ingredient {
-    width: 200px;
+    width: 400px;
     height: calc(1.25em * 6);
     line-height: 1.25;
 }
 
 input.content {
-    width: 200px;
+    width: 400px;
     height: calc(1.25em * 10);
     line-height: 1.25;
 }
 
 button {
     font-family: 'Arial', sans-serif;
+    font-size: 1rem;
     border: none;
     box-shadow: none;
     display: block;
-    background: rgb(192, 192, 192);
-    color: #333;
+    border-radius: 30px;
+    color: #fff;
+    background-color: #80D0FF;
     font-weight: bold;
     border-radius: 30px;
     width: 80px;
     height: 50px;
+}
+
+button:hover {
+    background-color: #40B0FF;
 }
 
 .button-container {
@@ -104,6 +112,16 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.content {
+  width: 600px;
+  list-style: none;
+}
+
+.content_textbox {
+  width: 400px;
+  list-style: none;
 }
 
 .content ol {
@@ -120,6 +138,12 @@ button {
 }
 
 .ingredient {
+  width: 600px;
+  list-style: none;
+}
+
+.ingredient_textbox {
+  width: 400px;
   list-style: none;
 }
 

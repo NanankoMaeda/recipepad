@@ -10,7 +10,12 @@
             のレシピ詳細
         </h2>
 
-        <p>材料</p>
+        <%
+        String file = (String) request.getAttribute("file");
+        %>
+        <p><img src="upload/<%=file %>" width="400"></p>
+
+        <strong><p>材料</p></strong>
         <%
         String ingredients = (String) request.getAttribute("ingredients");
         %>
@@ -19,7 +24,7 @@
                 <li><c:out value="${ingredient}" /></li>
             </c:forEach>
         </ul>
-        <p>作り方</p>
+        <strong><p>作り方</p></strong>
         <%
         String contents = (String) request.getAttribute("contents");
         %>
@@ -43,13 +48,13 @@
             <!-- お気に入り解除ボタン -->
             <form class="button-container" action="favorite" method="post">
                 <input type="hidden" name="id" id="id_recipe" value="${recipe.id}" />
-                <button type="submit" name="action" value="remove_favorite" style="width:150px;height:40px">お気に入り解除</button>
+                <button type="submit" name="action" value="remove_favorite" style="width:150px;height:50px">お気に入り解除</button>
             </form>
         <% } else { %>
             <!-- お気に入り登録ボタン -->
             <form class="button-container" action="favorite" method="post">
                 <input type="hidden" name="id" id="id_recipe" value="${recipe.id}" />
-                <button type="submit" name="action" value="add_favorite" style="width:150px;height:40px">お気に入り登録</button>
+                <button type="submit" name="action" value="add_favorite" style="width:150px;height:50px">お気に入り登録</button>
             </form>
         <% } %>
 

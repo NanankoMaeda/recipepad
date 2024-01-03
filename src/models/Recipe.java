@@ -38,6 +38,9 @@ public class Recipe {
     @Column(name = "content", length = 1000, nullable = false)
     private String content;
 
+    @Column(name = "file", length = 100, nullable = false)
+    private String file;
+
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
 
@@ -76,6 +79,14 @@ public class Recipe {
         this.content = content;
     }
 
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
     public Timestamp getCreated_at() {
         return created_at;
     }
@@ -91,5 +102,9 @@ public class Recipe {
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
+
+
+
+
 
 }
