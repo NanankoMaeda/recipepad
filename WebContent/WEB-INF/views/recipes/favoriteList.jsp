@@ -15,6 +15,16 @@
             </c:forEach>
         </ul>
 
+        <script>
+            // ローカルストレージからダークモードの状態を読み込む
+            window.onload = function() {
+                var isDarkMode = localStorage.getItem("darkMode") === "true";
+                if (isDarkMode) {
+                    document.body.classList.add("dark-mode");
+                }
+            };
+        </script>
+
         <p><a href="${pageContext.request.contextPath}/index">一覧に戻る</a></p>
     </c:param>
 </c:import>
